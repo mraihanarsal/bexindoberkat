@@ -2,13 +2,63 @@
      :class="sidebarOpen ? 'w-64' : 'w-20'"
      class="flex flex-col bg-blue-600 dark:bg-gray-800 text-white transition-all duration-300 min-h-screen">
     
-    <!-- Sidebar - Brand -->
-    <a href="{{ url('/') }}" class="flex items-center justify-center h-16 border-b border-blue-500 dark:border-gray-700 px-4">
-        <div class="transform -rotate-15">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    <!-- Sidebar - Brand with Modal Preview -->
+    <div x-data="{ openLogoPreview: false }" class="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-700">
+        <button @click="openLogoPreview = true" type="button" class="w-full flex items-center justify-center h-16 px-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none">
+            <!-- Full Logo for Expanded Sidebar -->
+            <img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo PT Bex Indo Berkat" class="h-10 w-auto object-contain drop-shadow-sm transition-all duration-300" x-show="sidebarOpen" />
+            
+            <!-- Short Text for Collapsed Sidebar -->
+            <div class="font-extrabold text-blue-600 dark:text-blue-400 text-xl tracking-wider transition-all duration-300" x-show="!sidebarOpen" style="display: none;">
+                BIB
+            </div>
+        </button>
+
+        <!-- Preview Modal -->
+        <div x-show="openLogoPreview" style="display: none;" class="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto overflow-x-hidden">
+            <!-- Backdrop -->
+            <div x-show="openLogoPreview"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"
+                @click="openLogoPreview = false"></div>
+
+            <!-- Modal Panel -->
+            <div x-show="openLogoPreview"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                class="relative bg-transparent p-6 max-w-sm w-full mx-4 flex flex-col items-center justify-center transform transition-all z-10">
+
+                <!-- Close Button -->
+                <button @click="openLogoPreview = false" class="absolute top-0 right-0 mt-4 mr-4 text-white hover:text-gray-300 focus:outline-none z-20">
+                    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+                <!-- Image container with white background -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl mb-6 w-full flex justify-center items-center mt-8 relative border border-gray-100 dark:border-gray-700" style="min-height: 150px;">
+                    <img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo Preview" class="max-h-48 w-auto drop-shadow-md" />
+                </div>
+
+                <!-- Download Button -->
+                <a href="{{ asset('logo/logobexindoberkat.png') }}" download="logobexindoberkat.png" class="inline-flex items-center px-6 py-3 bg-blue-600 border border-transparent rounded-full shadow-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    Download Logo
+                </a>
+            </div>
         </div>
-        <div class="mx-3 font-bold text-lg" x-show="sidebarOpen">Welcome !</div>
-    </a>
+    </div>
 
     <!-- Divider -->
     <hr class="border-blue-500 dark:border-gray-700 my-0">
