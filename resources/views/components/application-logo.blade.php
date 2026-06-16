@@ -1,1 +1,2 @@
-<img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo PT BEX INDO BERKAT" {{ $attributes }} />
+<img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo PT BEX INDO BERKAT" {{ $attributes->merge(['class' => 'object-contain transition-opacity duration-300 opacity-100 dark:opacity-0']) }} />
+<img src="{{ asset('logo/logodarkmode.png') }}" alt="Logo PT BEX INDO BERKAT" {{ $attributes->merge(['class' => 'object-contain transition-opacity duration-300 opacity-0 dark:opacity-100 transform scale-[1.8] absolute inset-0 w-full h-full']) }} />

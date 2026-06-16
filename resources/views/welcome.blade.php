@@ -70,11 +70,6 @@
                 <a href="{{ route('login') }}" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     Log in
                 </a>
-                @if (Route::has('register'))
-                <a href="{{ route('register') }}" class="px-5 py-2 border border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-500 rounded-lg text-sm font-medium transition-colors">
-                    Register
-                </a>
-                @endif
                 @endauth
             </nav>
             @endif
@@ -93,7 +88,7 @@
                         <span class="block text-blue-600 dark:text-blue-400 mt-2">PT BEX INDO BERKAT</span>
                     </h1>
                     <p class="mt-6 text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        Sistem Manajemen Keuangan terintegrasi untuk mempermudah pengelolaan data, pencatatan transaksi pemasukan dan pengeluaran, serta pembuatan laporan secara efisien.
+                        Sistem Manajemen Keuangan untuk mempermudah pengelolaan data, pencatatan transaksi pemasukan dan pengeluaran, serta pembuatan laporan secara efisien.
                     </p>
                 </div>
 
@@ -108,7 +103,7 @@
                     </a>
                     @if (Route::has('register'))
                     <a href="{{ route('register') }}" class="inline-flex justify-center items-center px-8 py-3.5 border border-gray-300 dark:border-gray-700 text-base font-medium rounded-xl text-gray-700 dark:text-gray-200 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                        Register Account
+                        Daftar Account
                     </a>
                     @endif
                     @endauth
@@ -117,8 +112,9 @@
 
             <!-- Right Side (Logo / Illustration) -->
             <div class="flex justify-center items-center order-1 lg:order-2">
-                <div class="w-full max-w-md bg-white p-12 rounded-[2rem] shadow-xl border border-gray-100 transform transition-transform duration-500 hover:scale-[1.02]">
-                    <img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo PT Bex Indo Berkat" class="w-full h-auto object-contain">
+                <div class="w-full max-w-sm h-48 relative transform transition-transform duration-500 hover:scale-[1.05]">
+                    <img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo PT Bex Indo Berkat" class="absolute inset-0 w-full h-full object-contain drop-shadow-2xl transition-opacity duration-300 opacity-100 dark:opacity-0">
+                    <img src="{{ asset('logo/logodarkmode.png') }}" alt="Logo PT Bex Indo Berkat" class="absolute inset-0 w-full h-full object-contain drop-shadow-2xl transition-opacity duration-300 opacity-0 dark:opacity-100 transform scale-[1.8]">
                 </div>
             </div>
 

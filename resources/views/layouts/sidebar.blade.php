@@ -1,15 +1,29 @@
-<div x-data="{ openPemasukan: false, sidebarOpen: true }" 
-     :class="sidebarOpen ? 'w-64' : 'w-20'"
-     class="flex flex-col bg-blue-600 dark:bg-gray-800 text-white transition-all duration-300 min-h-screen">
-    
+<!-- Mobile Sidebar Overlay Backdrop -->
+<div x-show="mobileSidebarOpen" 
+     @click="mobileSidebarOpen = false"
+     x-transition.opacity.duration.300ms
+     class="fixed inset-0 bg-gray-900/60 z-40 lg:hidden" style="display: none;"></div>
+
+<!-- Sidebar Container -->
+<div x-data="{ openPemasukan: false }" 
+     :class="{
+         'w-64': sidebarOpen || mobileSidebarOpen,
+         'w-20': !sidebarOpen && !mobileSidebarOpen,
+         'translate-x-0': mobileSidebarOpen,
+         '-translate-x-full': !mobileSidebarOpen
+     }"
+     class="fixed lg:relative inset-y-0 left-0 z-50 flex flex-col bg-blue-600 dark:bg-gray-800 text-white transition-all duration-300 min-h-screen lg:translate-x-0">
     <!-- Sidebar - Brand with Modal Preview -->
     <div x-data="{ openLogoPreview: false }" class="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-700">
         <button @click="openLogoPreview = true" type="button" class="w-full flex items-center justify-center h-16 px-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none">
             <!-- Full Logo for Expanded Sidebar -->
-            <img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo PT Bex Indo Berkat" class="h-10 w-auto object-contain drop-shadow-sm transition-all duration-300" x-show="sidebarOpen" />
+            <div class="relative w-40 h-10" x-show="sidebarOpen || mobileSidebarOpen">
+                <img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo PT Bex Indo Berkat" class="absolute inset-0 w-full h-full object-contain drop-shadow-sm transition-opacity duration-300 opacity-100 dark:opacity-0 pointer-events-none" />
+                <img src="{{ asset('logo/logodarkmode.png') }}" alt="Logo PT Bex Indo Berkat" class="absolute inset-0 w-full h-full object-contain drop-shadow-sm transition-opacity duration-300 opacity-0 dark:opacity-100 transform scale-[1.8] pointer-events-none" />
+            </div>
             
             <!-- Short Text for Collapsed Sidebar -->
-            <div class="font-extrabold text-blue-600 dark:text-blue-400 text-xl tracking-wider transition-all duration-300" x-show="!sidebarOpen" style="display: none;">
+            <div class="font-extrabold text-blue-600 dark:text-blue-400 text-xl tracking-wider transition-all duration-300" x-show="!sidebarOpen && !mobileSidebarOpen" style="display: none;">
                 BIB
             </div>
         </button>
@@ -44,9 +58,10 @@
                     </svg>
                 </button>
 
-                <!-- Image container with white background -->
-                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl mb-6 w-full flex justify-center items-center mt-8 relative border border-gray-100 dark:border-gray-700" style="min-height: 150px;">
-                    <img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo Preview" class="max-h-48 w-auto drop-shadow-md" />
+                <!-- Image container with dynamic background -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl mb-6 w-full flex justify-center items-center mt-8 relative border border-gray-100 dark:border-gray-700 h-64">
+                    <img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo Preview" class="absolute inset-0 w-full h-full p-8 object-contain drop-shadow-md transition-opacity duration-300 opacity-100 dark:opacity-0" />
+                    <img src="{{ asset('logo/logodarkmode.png') }}" alt="Logo Preview" class="absolute inset-0 w-full h-full p-8 object-contain drop-shadow-md transition-opacity duration-300 opacity-0 dark:opacity-100 transform scale-[1.8]" />
                 </div>
 
                 <!-- Download Button -->
@@ -69,15 +84,15 @@
             <li>
                 <a href="{{ url('/') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('/') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                    <span class="mx-3" x-show="sidebarOpen">Dashboard</span>
+                    <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Dashboard</span>
                 </a>
             </li>
 
             <!-- Divider -->
-            <hr class="border-blue-500 dark:border-gray-700 my-4" x-show="sidebarOpen">
+            <hr class="border-blue-500 dark:border-gray-700 my-4" x-show="sidebarOpen || mobileSidebarOpen">
 
             <!-- Heading -->
-            <div class="px-4 text-xs font-semibold text-blue-200 dark:text-gray-400 uppercase tracking-wider mb-2" x-show="sidebarOpen">
+            <div class="px-4 text-xs font-semibold text-blue-200 dark:text-gray-400 uppercase tracking-wider mb-2" x-show="sidebarOpen || mobileSidebarOpen">
                 Kelola
             </div>
 
@@ -86,12 +101,12 @@
                 <button @click="isPemasukanOpen = !isPemasukanOpen" class="w-full flex items-center justify-between px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        <span class="mx-3" x-show="sidebarOpen">Pemasukan</span>
+                        <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Pemasukan</span>
                     </div>
-                    <svg x-show="sidebarOpen" class="w-4 h-4 transform transition-transform" :class="isPemasukanOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg x-show="sidebarOpen || mobileSidebarOpen" class="w-4 h-4 transform transition-transform" :class="isPemasukanOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 
-                <div x-show="isPemasukanOpen && sidebarOpen" x-transition class="mt-2 py-2 bg-white dark:bg-gray-900 rounded-md shadow-inner mx-4">
+                <div x-show="isPemasukanOpen && (sidebarOpen || mobileSidebarOpen)" x-transition class="mt-2 py-2 bg-white dark:bg-gray-900 rounded-md shadow-inner mx-4">
                     <h6 class="px-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Platform:</h6>
                     <a href="{{ url('shopee') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
                         <img src="{{ asset('img/shopee.png') }}" alt="Shopee" class="w-4 h-4 mr-2">
@@ -112,7 +127,7 @@
             <li>
                 <a href="{{ url('pengeluaran') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pengeluaran') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <span class="mx-3" x-show="sidebarOpen">Pengeluaran</span>
+                    <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Pengeluaran</span>
                 </a>
             </li>
 
@@ -121,7 +136,7 @@
             <li>
                 <a href="{{ url('dashboard/kelola_pengguna') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('dashboard/kelola_pengguna') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <span class="mx-3" x-show="sidebarOpen">Kelola Pengguna</span>
+                    <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Kelola Pengguna</span>
                 </a>
             </li>
             @endif
@@ -130,7 +145,7 @@
             <li>
                 <a href="{{ url('laporan') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('laporan') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    <span class="mx-3" x-show="sidebarOpen">Rekapitulasi</span>
+                    <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Rekapitulasi</span>
                 </a>
             </li>
         </ul>

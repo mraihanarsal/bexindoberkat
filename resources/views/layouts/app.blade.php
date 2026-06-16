@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-      x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) }"
+      x-data="{ 
+          darkMode: localStorage.getItem('darkMode') === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches),
+          sidebarOpen: window.innerWidth >= 1024,
+          mobileSidebarOpen: false
+      }"
+      @resize.window="sidebarOpen = window.innerWidth >= 1024; if(window.innerWidth >= 1024) mobileSidebarOpen = false"
       x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))"
       :class="{ 'dark': darkMode }">
     <head>
