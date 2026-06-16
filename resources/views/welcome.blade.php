@@ -84,7 +84,7 @@
             <div class="flex flex-col justify-center space-y-6 text-center lg:text-left order-2 lg:order-1">
                 <div>
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
-                        <span class="block">Selamat Datang di</span>
+
                         <span class="block text-blue-600 dark:text-blue-400 mt-2">PT BEX INDO BERKAT</span>
                     </h1>
                     <p class="mt-6 text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
