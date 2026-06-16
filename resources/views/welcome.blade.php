@@ -114,7 +114,7 @@
             <div class="flex justify-center items-center order-1 lg:order-2">
                 <div class="w-full max-w-sm h-48 relative transform transition-transform duration-500 hover:scale-[1.05]">
                     <img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo PT Bex Indo Berkat" class="absolute inset-0 w-full h-full object-contain drop-shadow-2xl transition-opacity duration-300 opacity-100 dark:opacity-0">
-                    <img src="{{ asset('logo/logodarkmode.png') }}" alt="Logo PT Bex Indo Berkat" class="absolute inset-0 w-full h-full object-contain drop-shadow-2xl transition-opacity duration-300 opacity-0 dark:opacity-100 transform scale-[1.8]">
+                    <img src="{{ asset('logo/logodarkmode.png') }}" alt="Logo PT Bex Indo Berkat" class="absolute inset-0 w-full h-full object-contain drop-shadow-2xl transition-opacity duration-300 opacity-0 dark:opacity-100 transform scale-150">
                 </div>
             </div>
 

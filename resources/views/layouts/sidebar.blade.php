@@ -19,7 +19,7 @@
             <!-- Full Logo for Expanded Sidebar -->
             <div class="relative w-40 h-10" x-show="sidebarOpen || mobileSidebarOpen">
                 <img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo PT Bex Indo Berkat" class="absolute inset-0 w-full h-full object-contain drop-shadow-sm transition-opacity duration-300 opacity-100 dark:opacity-0 pointer-events-none" />
-                <img src="{{ asset('logo/logodarkmode.png') }}" alt="Logo PT Bex Indo Berkat" class="absolute inset-0 w-full h-full object-contain drop-shadow-sm transition-opacity duration-300 opacity-0 dark:opacity-100 transform scale-[1.8] pointer-events-none" />
+                <img src="{{ asset('logo/logodarkmode.png') }}" alt="Logo PT Bex Indo Berkat" class="absolute inset-0 w-full h-full object-contain drop-shadow-sm transition-opacity duration-300 opacity-0 dark:opacity-100 transform scale-150 pointer-events-none" />
             </div>
             
             <!-- Short Text for Collapsed Sidebar -->
@@ -61,7 +61,7 @@
                 <!-- Image container with dynamic background -->
                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl mb-6 w-full flex justify-center items-center mt-8 relative border border-gray-100 dark:border-gray-700 h-64">
                     <img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo Preview" class="absolute inset-0 w-full h-full p-8 object-contain drop-shadow-md transition-opacity duration-300 opacity-100 dark:opacity-0" />
-                    <img src="{{ asset('logo/logodarkmode.png') }}" alt="Logo Preview" class="absolute inset-0 w-full h-full p-8 object-contain drop-shadow-md transition-opacity duration-300 opacity-0 dark:opacity-100 transform scale-[1.8]" />
+                    <img src="{{ asset('logo/logodarkmode.png') }}" alt="Logo Preview" class="absolute inset-0 w-full h-full p-8 object-contain drop-shadow-md transition-opacity duration-300 opacity-0 dark:opacity-100 transform scale-150" />
                 </div>
 
                 <!-- Download Button -->

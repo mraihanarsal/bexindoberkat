@@ -29,9 +29,9 @@
     </head>
     <body class="font-sans text-gray-900 dark:text-gray-100 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div class="bg-white p-4 rounded-2xl shadow-sm mb-2 mt-4 transition-transform hover:scale-105">
+            <div class="mb-4 mt-8 transition-transform hover:scale-105">
                 <a href="/">
-                    <x-application-logo class="w-48 h-auto max-h-20 object-contain drop-shadow-sm" />
+                    <x-application-logo class="w-64 h-20" />
                 </a>
             </div>
 
