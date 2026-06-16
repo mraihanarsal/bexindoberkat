@@ -27,22 +27,28 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased text-gray-900 dark:text-gray-100">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
+        <div class="flex min-h-screen bg-gray-100 dark:bg-gray-900 overflow-hidden">
+            <!-- Sidebar -->
+            @include('layouts.sidebar')
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white dark:bg-gray-800 dark:bg-gray-200 shadow dark:shadow-none border-b border-gray-100 dark:border-gray-700">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+            <!-- Main Content Wrapper -->
+            <div class="flex-1 flex flex-col min-h-screen transition-all duration-300 w-full overflow-y-auto">
+                @include('layouts.navigation')
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                <!-- Page Heading -->
+                @isset($header)
+                    <header class="bg-white dark:bg-gray-800 shadow border-b border-gray-100 dark:border-gray-700 z-10">
+                        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                            {{ $header }}
+                        </div>
+                    </header>
+                @endisset
+
+                <!-- Page Content -->
+                <main class="flex-1 p-4 sm:p-6 lg:p-8">
+                    {{ $slot }}
+                </main>
+            </div>
         </div>
     </body>
 </html>
