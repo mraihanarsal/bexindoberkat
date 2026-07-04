@@ -10,4 +10,9 @@ class Platform extends Model
         'nama_platform',
         'aktif',
     ];
+
+    public function tokos()
+    {
+        return $this->hasMany(Toko::class);
+    }
 }
