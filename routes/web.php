@@ -21,6 +21,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/kategori', [App\Http\Controllers\KategoriController::class, 'index']);
     Route::get('/dashboard/produk', [App\Http\Controllers\ProdukController::class, 'index']);
 
+    // Platform Routes
+    Route::get('/dashboard/kelola_platform', [App\Http\Controllers\PlatformController::class, 'index']);
+    Route::post('/dashboard/kelola_platform', [App\Http\Controllers\PlatformController::class, 'store']);
+    Route::put('/dashboard/kelola_platform/{id}', [App\Http\Controllers\PlatformController::class, 'update']);
+    Route::delete('/dashboard/kelola_platform/{id}', [App\Http\Controllers\PlatformController::class, 'destroy']);
+    Route::patch('/dashboard/kelola_platform/{id}/activate', [App\Http\Controllers\PlatformController::class, 'activate']);
+
     // Pemasukan Mockup Routes
     Route::get('/pemasukan/input', [App\Http\Controllers\PemasukanController::class, 'input']);
     Route::get('/pemasukan/riwayat', [App\Http\Controllers\PemasukanController::class, 'riwayat']);
