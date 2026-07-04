@@ -1,0 +1,1 @@
+<?php namespace App\Http\Controllers; use Illuminate\Http\Request; class PengeluaranController extends Controller { public function input() { return view('pengeluaran.input'); } public function riwayat() { return view('pengeluaran.riwayat'); } }
