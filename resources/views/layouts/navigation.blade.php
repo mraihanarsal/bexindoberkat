@@ -1,7 +1,7 @@
-<nav class="bg-white dark:bg-gray-800 dark:bg-gray-200 border-b border-gray-100 dark:border-gray-700">
+<nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 h-16 flex-none">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+    <div class="w-full px-4 sm:px-6 lg:px-8 h-full">
+        <div class="flex justify-between h-full">
             <div class="flex items-center">
                 <!-- Sidebar Toggle Hamburger -->
                 <button @click="window.innerWidth >= 1024 ? sidebarOpen = !sidebarOpen : mobileSidebarOpen = !mobileSidebarOpen" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700 transition duration-150 ease-in-out">

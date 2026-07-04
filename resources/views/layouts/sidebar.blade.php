@@ -14,8 +14,8 @@
      }"
     class="fixed lg:relative inset-y-0 left-0 z-50 flex flex-col bg-blue-600 dark:bg-gray-800 text-white transition-all duration-300 min-h-screen lg:translate-x-0">
     <!-- Sidebar - Brand with Modal Preview -->
-    <div x-data="{ openLogoPreview: false }" class="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-700">
-        <button @click="openLogoPreview = true" type="button" class="w-full flex items-center justify-center h-16 px-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none">
+    <div x-data="{ openLogoPreview: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 h-16 flex-none flex items-center justify-center">
+        <button @click="openLogoPreview = true" type="button" class="w-full flex items-center justify-center h-full px-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none">
             <!-- Full Logo for Expanded Sidebar -->
             <div class="relative w-40 h-10" x-show="sidebarOpen || mobileSidebarOpen">
                 <img src="{{ asset('logo/logobexindoberkat.png') }}" alt="Logo PT Bex Indo Berkat" class="absolute inset-0 w-full h-full object-contain drop-shadow-sm transition-opacity duration-300 opacity-100 dark:opacity-0 pointer-events-none" />
@@ -76,8 +76,6 @@
         </div>
     </div>
 
-    <!-- Divider -->
-    <hr class="border-blue-500 dark:border-gray-700 my-0">
 
     <div class="flex-1 overflow-y-auto py-4">
         <ul class="space-y-2 px-2">
@@ -222,7 +220,7 @@
     </div>
 
     <!-- Sidebar Footer -->
-    <div class="bg-blue-700 dark:bg-gray-900 border-t border-blue-500 dark:border-gray-700 p-4 transition-all duration-300 mt-auto">
+    <div class="bg-blue-700 dark:bg-gray-900 border-t border-blue-500 dark:border-gray-700 h-16 px-4 shrink-0 flex flex-col justify-center transition-all duration-300 mt-auto">
         <div class="text-xs text-blue-200 dark:text-gray-400 mb-1" x-show="sidebarOpen || mobileSidebarOpen">Logged in as:</div>
         <div class="text-sm font-semibold truncate" x-show="sidebarOpen || mobileSidebarOpen">
             {{ auth()->user()->name ?? 'Guest' }} - {{ auth()->user()->role ?? 'User' }}
