@@ -43,8 +43,8 @@
 
                 <!-- Page Heading -->
                 @isset($header)
-                    <header class="bg-white dark:bg-gray-800 shadow border-b border-gray-100 dark:border-gray-700 z-10">
-                        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <header class="bg-transparent z-10">
+                        <div class="w-full py-6 px-4 sm:px-6 lg:px-8">
                             {{ $header }}
                         </div>
                     </header>
@@ -56,7 +56,7 @@
                 </main>
 
                 <!-- Main Footer -->
-                <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-4 px-4 sm:px-6 lg:px-8 transition-all duration-300 mt-auto">
+                <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 h-16 px-4 sm:px-6 lg:px-8 shrink-0 flex flex-col justify-center transition-all duration-300 mt-auto">
                     <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 dark:text-gray-400">
                         <div class="mb-2 md:mb-0">
                             &copy; PT BEX INDO BERKAT {{ date('Y') }}
