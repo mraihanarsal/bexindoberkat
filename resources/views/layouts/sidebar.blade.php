@@ -96,6 +96,38 @@
 
             <!-- Heading -->
             <div class="px-4 text-xs font-semibold text-blue-200 dark:text-gray-400 uppercase tracking-wider mb-2" x-show="sidebarOpen || mobileSidebarOpen">
+                Master Data
+            </div>
+            <!-- Nav Item - Kelola Pengguna -->
+            <li>
+                <a href="{{ url('dashboard/kelola_pengguna') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('dashboard/kelola_pengguna') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Pengguna</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('dashboard/kategori') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('dashboard/kategori') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                    </svg>
+                    <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Kategori</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('dashboard/produk') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('dashboard/produk') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                    </svg>
+                    <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Produk</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="border-blue-500 dark:border-gray-700 my-4" x-show="sidebarOpen || mobileSidebarOpen">
+
+            <div class="px-4 text-xs font-semibold text-blue-200 dark:text-gray-400 uppercase tracking-wider mb-2" x-show="sidebarOpen || mobileSidebarOpen">
                 Kelola
             </div>
 
@@ -113,16 +145,16 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                
+
                 <!-- Dropdown Content -->
                 <div x-show="isPemasukanOpen && (sidebarOpen || mobileSidebarOpen)"
-                     x-transition:enter="transition ease-out duration-200"
-                     x-transition:enter-start="opacity-0 transform -translate-y-2"
-                     x-transition:enter-end="opacity-100 transform translate-y-0"
-                     x-transition:leave="transition ease-in duration-150"
-                     x-transition:leave-start="opacity-100 transform translate-y-0"
-                     x-transition:leave-end="opacity-0 transform -translate-y-2"
-                     class="overflow-hidden mt-1">
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 transform -translate-y-2"
+                    x-transition:enter-end="opacity-100 transform translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 transform translate-y-0"
+                    x-transition:leave-end="opacity-0 transform -translate-y-2"
+                    class="overflow-hidden mt-1">
                     <ul class="space-y-1 py-1">
                         <li>
                             <a href="#" class="block px-11 py-2 text-sm text-blue-100 hover:text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors">
@@ -148,17 +180,8 @@
                 </a>
             </li>
 
-            <!-- Nav Item - Kelola Pengguna -->
-            @if (auth()->check() && (auth()->user()->is_master || auth()->user()->role === 'admin'))
-            <li>
-                <a href="{{ url('dashboard/kelola_pengguna') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('dashboard/kelola_pengguna') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
-                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
-                    <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Kelola Pengguna</span>
-                </a>
-            </li>
-            @endif
+
+
 
             <!-- Nav Item - Rekapitulasi -->
             <li>
@@ -178,7 +201,7 @@
         <div class="text-sm font-semibold truncate" x-show="sidebarOpen || mobileSidebarOpen">
             {{ auth()->user()->name ?? 'Guest' }} - {{ auth()->user()->role ?? 'User' }}
         </div>
-        
+
         <!-- Collapsed state icon or initials -->
         <div class="flex justify-center" x-show="!sidebarOpen && !mobileSidebarOpen" style="display: none;">
             <div class="w-10 h-10 rounded-full bg-blue-800 dark:bg-gray-700 border border-blue-500 dark:border-gray-600 flex items-center justify-center text-sm font-bold shadow-inner" title="{{ auth()->user()->name ?? 'Guest' }}">
