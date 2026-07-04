@@ -54,6 +54,20 @@
                 <main class="flex-1 p-4 sm:p-6 lg:p-8">
                     {{ $slot }}
                 </main>
+
+                <!-- Main Footer -->
+                <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-4 px-4 sm:px-6 lg:px-8 transition-all duration-300 mt-auto">
+                    <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 dark:text-gray-400">
+                        <div class="mb-2 md:mb-0">
+                            &copy; PT BEX INDO BERKAT {{ date('Y') }}
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">Privacy Policy</a>
+                            <span>&middot;</span>
+                            <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
     </body>
