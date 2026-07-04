@@ -56,12 +56,11 @@
                 </main>
 
                 <!-- Main Footer -->
-                <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 h-16 px-4 sm:px-6 lg:px-8 shrink-0 flex flex-col justify-center transition-all duration-300 mt-auto">
-                    <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 dark:text-gray-400">
-                        <div class="mb-2 md:mb-0">
-                            &copy; PT BEX INDO BERKAT {{ date('Y') }}
-                        </div>
-                        <div class="flex space-x-4">
+                <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 h-16 px-4 sm:px-6 lg:px-8 shrink-0 flex items-center justify-between transition-all duration-300 mt-auto w-full">
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                        &copy; PT BEX INDO BERKAT {{ date('Y') }}
+                    </div>
+                    <div class="flex space-x-4 text-sm text-gray-500 dark:text-gray-400">
                             <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">Privacy Policy</a>
                             <span>&middot;</span>
                             <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">Terms &amp; Conditions</a>
@@ -70,5 +69,50 @@
                 </footer>
             </div>
         </div>
+        
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Konfigurasi SweetAlert2 agar menyesuaikan dengan Dark Mode Tailwind
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+                    color: document.documentElement.classList.contains('dark') ? '#f3f4f6' : '#111827',
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                @if(session('success'))
+                    Toast.fire({
+                        icon: 'success',
+                        title: "{{ session('success') }}"
+                    });
+                @endif
+
+                @if(session('error'))
+                    Toast.fire({
+                        icon: 'error',
+                        title: "{{ session('error') }}"
+                    });
+                @endif
+                
+                @if($errors->any())
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Terdapat kesalahan pada input Anda!',
+                        background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+                        color: document.documentElement.classList.contains('dark') ? '#f3f4f6' : '#111827',
+                    });
+                @endif
+            });
+        </script>
     </body>
 </html>
