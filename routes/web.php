@@ -28,6 +28,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/dashboard/kelola_platform/{id}', [App\Http\Controllers\PlatformController::class, 'destroy']);
     Route::patch('/dashboard/kelola_platform/{id}/activate', [App\Http\Controllers\PlatformController::class, 'activate']);
 
+    // Toko Routes
+    Route::get('/dashboard/kelola_toko', [App\Http\Controllers\TokoController::class, 'index']);
+    Route::post('/dashboard/kelola_toko', [App\Http\Controllers\TokoController::class, 'store']);
+    Route::put('/dashboard/kelola_toko/{id}', [App\Http\Controllers\TokoController::class, 'update']);
+    Route::delete('/dashboard/kelola_toko/{id}', [App\Http\Controllers\TokoController::class, 'destroy']);
+    Route::patch('/dashboard/kelola_toko/{id}/activate', [App\Http\Controllers\TokoController::class, 'activate']);
+
     // Pemasukan Mockup Routes
     Route::get('/pemasukan/input', [App\Http\Controllers\PemasukanController::class, 'input']);
     Route::get('/pemasukan/riwayat', [App\Http\Controllers\PemasukanController::class, 'riwayat']);
