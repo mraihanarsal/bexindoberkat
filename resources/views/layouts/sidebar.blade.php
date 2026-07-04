@@ -157,12 +157,12 @@
                     class="overflow-hidden mt-1">
                     <ul class="space-y-1 py-1">
                         <li>
-                            <a href="#" class="block px-11 py-2 text-sm text-blue-100 hover:text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors">
+                            <a href="{{ url('pemasukan/input') }}" class="block px-11 py-2 text-sm text-blue-100 hover:text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pemasukan/input') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
                                 Input Pemasukan
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="block px-11 py-2 text-sm text-blue-100 hover:text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors">
+                            <a href="{{ url('pemasukan/riwayat') }}" class="block px-11 py-2 text-sm text-blue-100 hover:text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pemasukan/riwayat') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
                                 Riwayat Pemasukan
                             </a>
                         </li>
@@ -171,17 +171,43 @@
             </li>
 
             <!-- Nav Item - Pengeluaran -->
-            <li>
-                <a href="{{ url('pengeluaran') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pengeluaran') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
-                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            <li x-data="{ isPengeluaranOpen: false }">
+                <button @click="isPengeluaranOpen = !isPengeluaranOpen; if(!sidebarOpen && !mobileSidebarOpen) { sidebarOpen = true; isPengeluaranOpen = true; }" class="w-full flex items-center justify-between px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors" :class="{'bg-blue-700 dark:bg-gray-700': isPengeluaranOpen}">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                        <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Pengeluaran</span>
+                    </div>
+                    <!-- Chevron icon for dropdown -->
+                    <svg x-show="sidebarOpen || mobileSidebarOpen" :class="{ 'rotate-180': isPemasukanOpen }" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
-                    <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Pengeluaran</span>
-                </a>
+                </button>
+
+                <!-- Dropdown Content -->
+                <div x-show="isPengeluaranOpen && (sidebarOpen || mobileSidebarOpen)"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 transform -translate-y-2"
+                    x-transition:enter-end="opacity-100 transform translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 transform translate-y-0"
+                    x-transition:leave-end="opacity-0 transform -translate-y-2"
+                    class="overflow-hidden mt-1">
+                    <ul class="space-y-1 py-1">
+                        <li>
+                            <a href="{{ url('pengeluaran/input') }}" class="block px-11 py-2 text-sm text-blue-100 hover:text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pengeluaran/input') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                                Input Pengeluaran
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('pengeluaran/riwayat') }}" class="block px-11 py-2 text-sm text-blue-100 hover:text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pengeluaran/riwayat') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                                Riwayat Pengeluaran
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
-
-
-
 
             <!-- Nav Item - Rekapitulasi -->
             <li>
