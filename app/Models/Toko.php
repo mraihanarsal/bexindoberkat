@@ -16,4 +16,9 @@ class Toko extends Model
     {
         return $this->belongsTo(Platform::class);
     }
+
+    public function pemasukans()
+    {
+        return $this->hasMany(Pemasukan::class);
+    }
 }
