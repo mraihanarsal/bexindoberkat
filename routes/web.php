@@ -36,12 +36,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/dashboard/kelola_toko/{id}/activate', [App\Http\Controllers\TokoController::class, 'activate']);
 
     // Pemasukan Mockup Routes
-    Route::get('/pemasukan/input', [App\Http\Controllers\PemasukanController::class, 'input']);
-    Route::get('/pemasukan/riwayat', [App\Http\Controllers\PemasukanController::class, 'riwayat']);
+    Route::get('/pemasukan/input', [App\Http\Controllers\PemasukanController::class, 'input'])->name('pemasukan.input');
+    Route::post('/pemasukan/store', [App\Http\Controllers\PemasukanController::class, 'store'])->name('pemasukan.store');
+    Route::get('/pemasukan/riwayat', [App\Http\Controllers\PemasukanController::class, 'riwayat'])->name('pemasukan.riwayat');
+    Route::delete('/pemasukan/{id}', [App\Http\Controllers\PemasukanController::class, 'destroy'])->name('pemasukan.destroy');
 
     // Pengeluaran Mockup Routes
-    Route::get('/pengeluaran/input', [App\Http\Controllers\PengeluaranController::class, 'input']);
-    Route::get('/pengeluaran/riwayat', [App\Http\Controllers\PengeluaranController::class, 'riwayat']);
+    Route::get('/pengeluaran/input', [App\Http\Controllers\PengeluaranController::class, 'input'])->name('pengeluaran.input');
+    Route::post('/pengeluaran/store', [App\Http\Controllers\PengeluaranController::class, 'store'])->name('pengeluaran.store');
+    Route::get('/pengeluaran/riwayat', [App\Http\Controllers\PengeluaranController::class, 'riwayat'])->name('pengeluaran.riwayat');
+    Route::delete('/pengeluaran/{id}', [App\Http\Controllers\PengeluaranController::class, 'destroy'])->name('pengeluaran.destroy');
 
     // Laporan Mockup Route
     Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index']);
