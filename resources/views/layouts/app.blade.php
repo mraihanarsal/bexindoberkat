@@ -32,7 +32,10 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased text-gray-900 dark:text-gray-100">
+    <body class="font-sans antialiased text-gray-900 dark:text-gray-100"
+          data-session-success="{{ session('success') }}"
+          data-session-error="{{ session('error') }}"
+          data-has-errors="{{ $errors->any() ? 'true' : 'false' }}">
         <div class="flex min-h-screen bg-gray-100 dark:bg-gray-900 overflow-hidden">
             <!-- Sidebar -->
             @include('layouts.sidebar')
@@ -74,44 +77,50 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                // Konfigurasi SweetAlert2 agar menyesuaikan dengan Dark Mode Tailwind
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
-                    color: document.documentElement.classList.contains('dark') ? '#f3f4f6' : '#111827',
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
+                const sessionSuccess = document.body.dataset.sessionSuccess;
+                const sessionError = document.body.dataset.sessionError;
+                const hasErrors = document.body.dataset.hasErrors === 'true';
 
-                @if(session('success'))
-                    Toast.fire({
-                        icon: 'success',
-                        title: "{{ session('success') }}"
-                    });
-                @endif
-
-                @if(session('error'))
-                    Toast.fire({
-                        icon: 'error',
-                        title: "{{ session('error') }}"
-                    });
-                @endif
-                
-                @if($errors->any())
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Terdapat kesalahan pada input Anda!',
+                if (sessionSuccess || sessionError || hasErrors) {
+                    // Konfigurasi SweetAlert2 agar menyesuaikan dengan Dark Mode Tailwind
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
                         background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
                         color: document.documentElement.classList.contains('dark') ? '#f3f4f6' : '#111827',
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
                     });
-                @endif
+
+                    if (sessionSuccess) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: sessionSuccess
+                        });
+                    }
+
+                    if (sessionError) {
+                        Toast.fire({
+                            icon: 'error',
+                            title: sessionError
+                        });
+                    }
+                    
+                    if (hasErrors) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Terdapat kesalahan pada input Anda!',
+                            background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+                            color: document.documentElement.classList.contains('dark') ? '#f3f4f6' : '#111827',
+                        });
+                    }
+                }
             });
         </script>
     </body>
