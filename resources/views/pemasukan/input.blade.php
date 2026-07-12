@@ -37,35 +37,34 @@
 
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tanggal Pemasukan</label>
-                            <div class="grid grid-cols-3 gap-4">
-                                <!-- Tanggal -->
-                                <div>
-                                    <select name="hari" required class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                        <option value="">-- Tanggal --</option>
-                                        @for($i=1; $i<=31; $i++)
-                                            <option value="{{ $i }}" {{ date('j') == $i ? 'selected' : '' }}>{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
-                                            @endfor
-                                    </select>
-                                </div>
-                                <!-- Bulan -->
-                                <div>
-                                    <select name="bulan" required class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                        <option value="">-- Bulan --</option>
-                                        @for($i=1; $i<=12; $i++)
-                                            <option value="{{ $i }}" {{ date('n') == $i ? 'selected' : '' }}>{{ date('F', mktime(0, 0, 0, $i, 10)) }}</option>
-                                            @endfor
-                                    </select>
-                                </div>
-                                <!-- Tahun -->
-                                <div>
-                                    <input type="number" name="tahun" required value="{{ date('Y') }}" class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Tahun">
-                                </div>
-                            </div>
+                            <input type="date" name="tanggal" required value="{{ date('Y-m-d') }}" class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                         </div>
 
-                        <div class="mb-4">
+                        <div class="mb-4" x-data="{
+                            raw: '',
+                            formatInput(e) {
+                                let val = e.target.value.replace(/\D/g, '');
+                                if (val.length > 15) {
+                                    val = '';
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: 'Melebihi Batas',
+                                        text: 'Nominal melebihi batas maksimal rupiah.',
+                                        background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+                                        color: document.documentElement.classList.contains('dark') ? '#f3f4f6' : '#111827'
+                                    });
+                                }
+                                this.raw = val;
+                                e.target.value = val ? new Intl.NumberFormat('id-ID').format(val) : '';
+                            }
+                        }">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jumlah Pendapatan (Rp)</label>
-                            <input type="number" name="jumlah_pendapatan" required min="0" step="1" class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Contoh: 1500000">
+                            <input type="text"
+                                @input="formatInput($event)"
+                                required
+                                class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                placeholder="Contoh: 1.500.000">
+                            <input type="hidden" name="jumlah_pendapatan" :value="raw" required>
                         </div>
 
                         <div class="mb-6">
@@ -84,9 +83,7 @@
             <!-- Form Auto Upload PDF -->
             <div class="w-full lg:w-1/2 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class="text-lg font-bold mb-4">Auto-Import dari PDF Invoice</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Upload file PDF (bisa lebih dari 1 file sekaligus). Sistem akan secara cerdas mengekstrak Nama Toko, Platform, dan Total Penghasilan secara otomatis.</p>
-
+                    <h3 class="text-lg font-bold mb-4">Auto-Import dari PDF Invoice Shopee</h3>
                     <form action="{{ route('pemasukan.upload_pdf') }}" method="POST" enctype="multipart/form-data" x-data="{ isUploading: false }" @submit="isUploading = true">
                         @csrf
                         <div class="mb-4">
@@ -95,7 +92,7 @@
                         </div>
 
                         <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-                            <span class="font-medium">Catatan:</span> <strong>Pastikan File Sesuai dengan tanggalnya.</strong>
+                            <span class="font-medium">Catatan:</span> <strong>Hanya Untuk Invoice Shopee.</strong>
                         </div>
 
                         <div class="flex justify-end">
