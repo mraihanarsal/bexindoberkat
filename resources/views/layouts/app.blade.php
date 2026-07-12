@@ -36,40 +36,42 @@
           data-session-success="{{ session('success') }}"
           data-session-error="{{ session('error') }}"
           data-has-errors="{{ $errors->any() ? 'true' : 'false' }}">
-        <div class="flex min-h-screen bg-gray-100 dark:bg-gray-900 overflow-hidden">
+        <div class="flex h-screen bg-[#f5f7fb] dark:bg-gray-900 overflow-hidden">
             <!-- Sidebar -->
             @include('layouts.sidebar')
 
             <!-- Main Content Wrapper -->
-            <div class="flex-1 flex flex-col min-h-screen transition-all duration-300 w-full overflow-y-auto">
+            <div class="flex-1 flex flex-col h-screen overflow-hidden">
                 @include('layouts.navigation')
 
-                <!-- Page Heading -->
-                @isset($header)
-                    <header class="bg-transparent z-10">
-                        <div class="w-full py-6 px-4 sm:px-6 lg:px-8">
-                            {{ $header }}
-                        </div>
-                    </header>
-                @endisset
+                <!-- Scrollable Content Area -->
+                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-[#f5f7fb] dark:bg-gray-900 flex flex-col">
+                    <!-- Page Heading -->
+                    @isset($header)
+                        <header class="bg-transparent z-10 flex-shrink-0">
+                            <div class="w-full py-6 px-4 sm:px-6 lg:px-8">
+                                {{ $header }}
+                            </div>
+                        </header>
+                    @endisset
 
-                <!-- Page Content -->
-                <main class="flex-1 p-4 sm:p-6 lg:p-8">
-                    {{ $slot }}
-                </main>
-
-                <!-- Main Footer -->
-                <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 h-16 px-4 sm:px-6 lg:px-8 shrink-0 flex items-center justify-between transition-all duration-300 mt-auto w-full">
-                    <div class="text-sm text-gray-500 dark:text-gray-400">
-                        &copy; PT BEX INDO BERKAT {{ date('Y') }}
+                    <!-- Page Content -->
+                    <div class="flex-1 p-4 sm:p-6 lg:p-8">
+                        {{ $slot }}
                     </div>
-                    <div class="flex space-x-4 text-sm text-gray-500 dark:text-gray-400">
+
+                    <!-- Main Footer -->
+                    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 h-16 px-4 sm:px-6 lg:px-8 flex-shrink-0 flex items-center justify-between transition-all duration-300 w-full mt-auto">
+                        <div class="text-sm text-gray-500 dark:text-gray-400">
+                            &copy; PT BEX INDO BERKAT {{ date('Y') }}
+                        </div>
+                        <div class="flex space-x-4 text-sm text-gray-500 dark:text-gray-400">
                             <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">Privacy Policy</a>
                             <span>&middot;</span>
                             <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">Terms &amp; Conditions</a>
                         </div>
-                    </div>
-                </footer>
+                    </footer>
+                </main>
             </div>
         </div>
         
