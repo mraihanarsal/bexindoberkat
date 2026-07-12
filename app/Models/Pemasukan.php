@@ -13,10 +13,16 @@ class Pemasukan extends Model
         'tahun',
         'jumlah_pendapatan',
         'keterangan',
+        'user_id',
     ];
 
     public function toko()
     {
         return $this->belongsTo(Toko::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

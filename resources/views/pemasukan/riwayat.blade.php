@@ -28,6 +28,9 @@
                                     <th scope="col" class="px-6 py-4 font-semibold">Tanggal</th>
                                     <th scope="col" class="px-6 py-4 font-semibold">Jumlah Pendapatan</th>
                                     <th scope="col" class="px-6 py-4 font-semibold">Keterangan</th>
+                                    @if(auth()->check() && auth()->user()->role == 1)
+                                    <th scope="col" class="px-6 py-4 font-semibold text-center">Dibuat Oleh</th>
+                                    @endif
                                     <th scope="col" class="px-6 py-4 font-semibold text-right">Aksi</th>
                                 </tr>
                             </thead>
@@ -41,6 +44,13 @@
                                     <td class="px-6 py-4">{{ \Carbon\Carbon::parse($pemasukan->tanggal)->translatedFormat('d F Y') }}</td>
                                     <td class="px-6 py-4 font-semibold text-green-600 dark:text-green-400">Rp {{ number_format($pemasukan->jumlah_pendapatan, 0, ',', '.') }}</td>
                                     <td class="px-6 py-4">{{ $pemasukan->keterangan ?? '-' }}</td>
+                                    @if(auth()->check() && auth()->user()->role == 1)
+                                    <td class="px-6 py-4 text-center">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400">
+                                            {{ $pemasukan->user->name ?? 'Sistem' }}
+                                        </span>
+                                    </td>
+                                    @endif
                                     <td class="px-6 py-4 text-right">
                                         <form action="{{ route('pemasukan.destroy', $pemasukan->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                             @csrf
@@ -51,7 +61,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="5" class="px-6 py-4 text-center">Belum ada data pemasukan.</td>
+                                    <td colspan="{{ (auth()->check() && auth()->user()->role == 1) ? '6' : '5' }}" class="px-6 py-4 text-center">Belum ada data pemasukan.</td>
                                 </tr>
                                 @endforelse
                             </tbody>
