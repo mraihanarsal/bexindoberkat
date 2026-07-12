@@ -12,9 +12,10 @@
          'translate-x-0': mobileSidebarOpen,
          '-translate-x-full': !mobileSidebarOpen
      }"
-    class="fixed lg:relative inset-y-0 left-0 z-50 flex flex-col bg-blue-600 dark:bg-gray-800 text-white transition-all duration-300 min-h-screen lg:translate-x-0">
+    class="fixed lg:relative inset-y-0 left-0 z-50 flex flex-col bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-r border-gray-200 dark:border-gray-700 transition-all duration-300 h-screen lg:translate-x-0">
+    
     <!-- Sidebar - Brand with Modal Preview -->
-    <div x-data="{ openLogoPreview: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 h-16 flex-none flex items-center justify-center">
+    <div x-data="{ openLogoPreview: false }" class="bg-transparent border-b border-gray-200 dark:border-gray-700 h-16 flex-none flex items-center justify-center">
         <button @click="openLogoPreview = true" type="button" class="w-full flex items-center justify-center h-full px-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none">
             <!-- Full Logo for Expanded Sidebar -->
             <div class="relative w-40 h-10" x-show="sidebarOpen || mobileSidebarOpen">
@@ -81,7 +82,7 @@
         <ul class="space-y-2 px-2">
             <!-- Nav Item - Dashboard -->
             <li>
-                <a href="{{ url('/') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('/') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                <a href="{{ url('/') }}" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-md transition-colors {{ request()->is('/') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                     </svg>
@@ -90,16 +91,16 @@
             </li>
 
             <!-- Divider -->
-            <hr class="border-blue-500 dark:border-gray-700 my-4" x-show="sidebarOpen || mobileSidebarOpen">
+            <hr class="border-gray-200 dark:border-gray-700 my-4" x-show="sidebarOpen || mobileSidebarOpen">
 
             <!-- Heading -->
-            <div class="px-4 text-xs font-semibold text-blue-200 dark:text-gray-400 uppercase tracking-wider mb-2" x-show="sidebarOpen || mobileSidebarOpen">
+            <div class="px-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" x-show="sidebarOpen || mobileSidebarOpen">
                 Master Data
             </div>
 
             <!-- Nav Item - Kelola Platform -->
             <li>
-                <a href="{{ url('dashboard/kelola_platform') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('dashboard/kelola_platform') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                <a href="{{ url('dashboard/kelola_platform') }}" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-md transition-colors {{ request()->is('dashboard/kelola_platform') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                     </svg>
@@ -108,7 +109,7 @@
             </li>
             <!-- Nav Item - Kelola Toko -->
             <li>
-                <a href="{{ url('dashboard/kelola_toko') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('dashboard/kelola_toko') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                <a href="{{ url('dashboard/kelola_toko') }}" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-md transition-colors {{ request()->is('dashboard/kelola_toko') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                     </svg>
@@ -116,7 +117,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('dashboard/produk') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('dashboard/produk') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                <a href="{{ url('dashboard/produk') }}" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-md transition-colors {{ request()->is('dashboard/produk') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                     </svg>
@@ -125,7 +126,7 @@
             </li>
             <!-- Nav Item - Kelola Pengguna -->
             <li>
-                <a href="{{ url('dashboard/kelola_pengguna') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('dashboard/kelola_pengguna') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                <a href="{{ url('dashboard/kelola_pengguna') }}" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-md transition-colors {{ request()->is('dashboard/kelola_pengguna') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                     </svg>
@@ -133,7 +134,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('dashboard/kategori') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('dashboard/kategori') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                <a href="{{ url('dashboard/kategori') }}" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-md transition-colors {{ request()->is('dashboard/kategori') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                     </svg>
@@ -142,15 +143,15 @@
             </li>
 
             <!-- Divider -->
-            <hr class="border-blue-500 dark:border-gray-700 my-4" x-show="sidebarOpen || mobileSidebarOpen">
+            <hr class="border-gray-200 dark:border-gray-700 my-4" x-show="sidebarOpen || mobileSidebarOpen">
 
-            <div class="px-4 text-xs font-semibold text-blue-200 dark:text-gray-400 uppercase tracking-wider mb-2" x-show="sidebarOpen || mobileSidebarOpen">
+            <div class="px-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2" x-show="sidebarOpen || mobileSidebarOpen">
                 Kelola
             </div>
 
             <!-- Menu Toko (Pemasukan) -->
             <li x-data="{ isPemasukanOpen: false }">
-                <button @click="isPemasukanOpen = !isPemasukanOpen; if(!sidebarOpen && !mobileSidebarOpen) { sidebarOpen = true; isPemasukanOpen = true; }" class="w-full flex items-center justify-between px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors" :class="{'bg-blue-700 dark:bg-gray-700': isPemasukanOpen}">
+                <button @click="isPemasukanOpen = !isPemasukanOpen; if(!sidebarOpen && !mobileSidebarOpen) { sidebarOpen = true; isPemasukanOpen = true; }" class="w-full flex items-center justify-between px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-md transition-colors" :class="{'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold': isPemasukanOpen}">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
@@ -174,12 +175,12 @@
                     class="overflow-hidden mt-1">
                     <ul class="space-y-1 py-1">
                         <li>
-                            <a href="{{ url('pemasukan/input') }}" class="block px-11 py-2 text-sm text-blue-100 hover:text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pemasukan/input') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                            <a href="{{ url('pemasukan/input') }}" class="block px-11 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pemasukan/input') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                                 Input Pemasukan
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('pemasukan/riwayat') }}" class="block px-11 py-2 text-sm text-blue-100 hover:text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pemasukan/riwayat') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                            <a href="{{ url('pemasukan/riwayat') }}" class="block px-11 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pemasukan/riwayat') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                                 Riwayat Pemasukan
                             </a>
                         </li>
@@ -189,7 +190,7 @@
 
             <!-- Nav Item - Pengeluaran -->
             <li x-data="{ isPengeluaranOpen: false }">
-                <button @click="isPengeluaranOpen = !isPengeluaranOpen; if(!sidebarOpen && !mobileSidebarOpen) { sidebarOpen = true; isPengeluaranOpen = true; }" class="w-full flex items-center justify-between px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors" :class="{'bg-blue-700 dark:bg-gray-700': isPengeluaranOpen}">
+                <button @click="isPengeluaranOpen = !isPengeluaranOpen; if(!sidebarOpen && !mobileSidebarOpen) { sidebarOpen = true; isPengeluaranOpen = true; }" class="w-full flex items-center justify-between px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-md transition-colors" :class="{'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold': isPengeluaranOpen}">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
@@ -213,12 +214,12 @@
                     class="overflow-hidden mt-1">
                     <ul class="space-y-1 py-1">
                         <li>
-                            <a href="{{ url('pengeluaran/input') }}" class="block px-11 py-2 text-sm text-blue-100 hover:text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pengeluaran/input') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                            <a href="{{ url('pengeluaran/input') }}" class="block px-11 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pengeluaran/input') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                                 Input Pengeluaran
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('pengeluaran/riwayat') }}" class="block px-11 py-2 text-sm text-blue-100 hover:text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pengeluaran/riwayat') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                            <a href="{{ url('pengeluaran/riwayat') }}" class="block px-11 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pengeluaran/riwayat') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                                 Riwayat Pengeluaran
                             </a>
                         </li>
@@ -228,7 +229,7 @@
 
             <!-- Nav Item - Rekapitulasi -->
             <li>
-                <a href="{{ url('laporan') }}" class="flex items-center px-4 py-2 text-white hover:bg-blue-700 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('laporan') ? 'bg-blue-700 dark:bg-gray-700 font-bold' : '' }}">
+                <a href="{{ url('laporan') }}" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-md transition-colors {{ request()->is('laporan') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
@@ -239,15 +240,15 @@
     </div>
 
     <!-- Sidebar Footer -->
-    <div class="bg-blue-700 dark:bg-gray-900 border-t border-blue-500 dark:border-gray-700 h-16 px-4 shrink-0 flex flex-col justify-center transition-all duration-300 mt-auto">
-        <div class="text-xs text-blue-200 dark:text-gray-400 mb-1" x-show="sidebarOpen || mobileSidebarOpen">Logged in as:</div>
+    <div class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 h-16 px-4 shrink-0 flex flex-col justify-center mt-auto">
+        <div class="text-xs text-gray-500 dark:text-gray-400 mb-1" x-show="sidebarOpen || mobileSidebarOpen">Logged in as:</div>
         <div class="text-sm font-semibold truncate" x-show="sidebarOpen || mobileSidebarOpen">
             {{ auth()->user()->name ?? 'Guest' }} - {{ auth()->user()->role ?? 'User' }}
         </div>
 
         <!-- Collapsed state icon or initials -->
         <div class="flex justify-center" x-show="!sidebarOpen && !mobileSidebarOpen" style="display: none;">
-            <div class="w-10 h-10 rounded-full bg-blue-800 dark:bg-gray-700 border border-blue-500 dark:border-gray-600 flex items-center justify-center text-sm font-bold shadow-inner" title="{{ auth()->user()->name ?? 'Guest' }}">
+            <div class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 flex items-center justify-center text-sm font-bold shadow-inner" title="{{ auth()->user()->name ?? 'Guest' }}">
                 {{ substr(auth()->user()->name ?? 'G', 0, 1) }}
             </div>
         </div>
