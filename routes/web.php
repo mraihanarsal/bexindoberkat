@@ -19,6 +19,9 @@ Route::middleware('auth')->group(function () {
     // Dashboard Mockup Routes
     Route::get('/dashboard/kelola_pengguna', [App\Http\Controllers\PenggunaController::class, 'index']);
     Route::get('/dashboard/kategori', [App\Http\Controllers\KategoriController::class, 'index']);
+    Route::post('/dashboard/kategori', [App\Http\Controllers\KategoriController::class, 'store']);
+    Route::put('/dashboard/kategori/{id}', [App\Http\Controllers\KategoriController::class, 'update']);
+    Route::delete('/dashboard/kategori/{id}', [App\Http\Controllers\KategoriController::class, 'destroy']);
     Route::get('/dashboard/produk', [App\Http\Controllers\ProdukController::class, 'index']);
 
     // Platform Routes
