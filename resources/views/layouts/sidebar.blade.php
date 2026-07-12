@@ -186,6 +186,11 @@
                                 Riwayat Pemasukan
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ url('pemasukan/grafik') }}" class="block px-11 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors {{ request()->is('pemasukan/grafik') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
+                                Grafik Pemasukan
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

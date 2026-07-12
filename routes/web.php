@@ -44,7 +44,9 @@ Route::middleware('auth')->group(function () {
     // Pemasukan Mockup Routes
     Route::get('/pemasukan/input', [App\Http\Controllers\PemasukanController::class, 'input'])->name('pemasukan.input');
     Route::post('/pemasukan/store', [App\Http\Controllers\PemasukanController::class, 'store'])->name('pemasukan.store');
+    Route::post('/pemasukan/upload-pdf', [App\Http\Controllers\PemasukanController::class, 'uploadPdf'])->name('pemasukan.upload_pdf');
     Route::get('/pemasukan/riwayat', [App\Http\Controllers\PemasukanController::class, 'riwayat'])->name('pemasukan.riwayat');
+    Route::get('/pemasukan/grafik', [App\Http\Controllers\PemasukanController::class, 'grafik'])->name('pemasukan.grafik');
     Route::delete('/pemasukan/{id}', [App\Http\Controllers\PemasukanController::class, 'destroy'])->name('pemasukan.destroy');
 
     // Pengeluaran Mockup Routes
