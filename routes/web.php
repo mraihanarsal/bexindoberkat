@@ -16,8 +16,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Dashboard Mockup Routes
+    // Dashboard Pengguna Routes (Only for Owner)
     Route::get('/dashboard/kelola_pengguna', [App\Http\Controllers\PenggunaController::class, 'index']);
+    Route::post('/dashboard/kelola_pengguna', [App\Http\Controllers\PenggunaController::class, 'store']);
+    Route::put('/dashboard/kelola_pengguna/{id}', [App\Http\Controllers\PenggunaController::class, 'update']);
+    Route::delete('/dashboard/kelola_pengguna/{id}', [App\Http\Controllers\PenggunaController::class, 'destroy']);
     Route::get('/dashboard/kategori', [App\Http\Controllers\KategoriController::class, 'index']);
     Route::post('/dashboard/kategori', [App\Http\Controllers\KategoriController::class, 'store']);
     Route::put('/dashboard/kategori/{id}', [App\Http\Controllers\KategoriController::class, 'update']);

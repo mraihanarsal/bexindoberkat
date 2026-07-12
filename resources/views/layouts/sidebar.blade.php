@@ -124,7 +124,8 @@
                     <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Produk</span>
                 </a>
             </li>
-            <!-- Nav Item - Kelola Pengguna -->
+            <!-- Nav Item - Kelola Pengguna (Hanya Owner) -->
+            @if(auth()->check() && auth()->user()->role == 1)
             <li>
                 <a href="{{ url('dashboard/kelola_pengguna') }}" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-md transition-colors {{ request()->is('dashboard/kelola_pengguna') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -133,6 +134,7 @@
                     <span class="mx-3" x-show="sidebarOpen || mobileSidebarOpen">Pengguna</span>
                 </a>
             </li>
+            @endif
             <li>
                 <a href="{{ url('dashboard/kategori') }}" class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-md transition-colors {{ request()->is('dashboard/kategori') ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-semibold' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -243,7 +245,9 @@
     <div class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 h-16 px-4 shrink-0 flex flex-col justify-center mt-auto">
         <div class="text-xs text-gray-500 dark:text-gray-400 mb-1" x-show="sidebarOpen || mobileSidebarOpen">Logged in as:</div>
         <div class="text-sm font-semibold truncate" x-show="sidebarOpen || mobileSidebarOpen">
-            {{ auth()->user()->name ?? 'Guest' }} - {{ auth()->user()->role ?? 'User' }}
+            {{ auth()->user()->name ?? 'Guest' }} - 
+            @if(auth()->check() && auth()->user()->role == 1) Owner
+            @else Admin @endif
         </div>
 
         <!-- Collapsed state icon or initials -->
