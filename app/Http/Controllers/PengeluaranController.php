@@ -44,7 +44,7 @@ class PengeluaranController extends Controller
 
     public function riwayat() 
     { 
-        $pengeluarans = Pengeluaran::orderBy('tahun', 'desc')->orderBy('bulan', 'desc')->get();
+        $pengeluarans = Pengeluaran::latest('tanggal')->latest('id')->paginate(10);
         return view('pengeluaran.riwayat', compact('pengeluarans')); 
     } 
 

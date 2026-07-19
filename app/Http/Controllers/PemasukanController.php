@@ -147,7 +147,7 @@ class PemasukanController extends Controller
 
     public function riwayat() 
     { 
-        $pemasukans = Pemasukan::with('toko.platform')->orderBy('tahun', 'desc')->orderBy('bulan', 'desc')->get();
+        $pemasukans = Pemasukan::with('toko.platform')->latest('tanggal')->latest('id')->paginate(10);
         return view('pemasukan.riwayat', compact('pemasukans')); 
     } 
 

@@ -17,6 +17,7 @@
                         <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 dark:text-gray-300 uppercase bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700">
                                 <tr>
+                                    <th scope="col" class="px-6 py-4 font-semibold">No</th>
                                     <th scope="col" class="px-6 py-4 font-semibold">Toko & Platform</th>
                                     <th scope="col" class="px-6 py-4 font-semibold">Tanggal</th>
                                     <th scope="col" class="px-6 py-4 font-semibold">Jumlah Pendapatan</th>
@@ -31,6 +32,7 @@
                             <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                                 @forelse($pemasukans as $pemasukan)
                                 <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                                    <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ $pemasukans->firstItem() + $loop->index }}</td>
                                     <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
                                         {{ $pemasukan->toko->nama_toko }}<br>
                                         <span class="text-xs text-gray-500">{{ $pemasukan->toko->platform->nama_platform }}</span>
@@ -58,11 +60,14 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="{{ (auth()->check() && auth()->user()->role == 1) ? '6' : '5' }}" class="px-6 py-4 text-center">Belum ada data pemasukan.</td>
+                                    <td colspan="{{ (auth()->check() && auth()->user()->role == 1) ? '7' : '6' }}" class="px-6 py-4 text-center">Belum ada data pemasukan.</td>
                                 </tr>
                                 @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-4">
+                        {{ $pemasukans->links() }}
                     </div>
                 </div>
             </div>
