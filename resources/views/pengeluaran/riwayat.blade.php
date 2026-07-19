@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-5">
         <div class="w-full sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -14,11 +14,7 @@
                         <a href="{{ route('pengeluaran.input') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors shadow-sm">+ Tambah Data</a>
                     </div>
                     
-                    @if (session('success'))
-                        <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+
 
                     <div class="overflow-x-auto border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
                         <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
@@ -39,7 +35,7 @@
                                     <td class="px-6 py-4 font-semibold text-red-600 dark:text-red-400">Rp {{ number_format($pengeluaran->jumlah_pengeluaran, 0, ',', '.') }}</td>
                                     <td class="px-6 py-4">{{ $pengeluaran->keterangan ?? '-' }}</td>
                                     <td class="px-6 py-4 text-right">
-                                        <form action="{{ route('pengeluaran.destroy', $pengeluaran->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                        <form action="{{ route('pengeluaran.destroy', $pengeluaran->id) }}" method="POST" class="inline-block" onsubmit="confirmDelete(event, this)">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 font-medium">Hapus</button>
@@ -58,4 +54,25 @@
             </div>
         </div>
     </div>
+    <script>
+        function confirmDelete(event, form) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Hapus Data?',
+                text: "Anda yakin ingin menghapus data riwayat pengeluaran ini?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+                background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+                color: document.documentElement.classList.contains('dark') ? '#f3f4f6' : '#111827',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        }
+    </script>
 </x-app-layout>

@@ -22,7 +22,7 @@ class PengeluaranController extends Controller
             'hari' => 'required|integer|min:1|max:31',
             'bulan' => 'required|integer|min:1|max:12',
             'tahun' => 'required|integer|min:2000',
-            'jumlah_pengeluaran' => 'required|numeric|min:0',
+            'jumlah_pengeluaran' => 'required|numeric|min:0|max:999999999999999',
             'keterangan' => 'nullable|string'
         ]);
 

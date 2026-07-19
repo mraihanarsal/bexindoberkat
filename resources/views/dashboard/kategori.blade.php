@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12" x-data="{
+    <div class="py-5" x-data="{
         showModal: false,
         isEdit: false,
         kategoriId: '',

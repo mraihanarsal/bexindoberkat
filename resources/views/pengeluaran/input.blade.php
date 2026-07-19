@@ -1,24 +1,24 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Input Pengeluaran') }}
+            {{ __('Pengeluaran') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-5">
         <div class="w-full sm:px-6 lg:px-8 max-w-4xl mx-auto">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="text-lg font-bold mb-4">Form Input Pengeluaran Perusahaan</h3>
-                    
+
                     @if ($errors->any())
-                        <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-                            <ul class="list-disc list-inside">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                        <ul class="list-disc list-inside">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
 
                     <form action="{{ route('pengeluaran.store') }}" method="POST">
@@ -28,11 +28,11 @@
                             <select name="nama_pengeluaran" required class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <option value="">-- Pilih Kategori Pengeluaran --</option>
                                 @foreach($kategoris as $kategori)
-                                    <option value="{{ $kategori->nama_kategori }}">{{ $kategori->nama_kategori }}</option>
+                                <option value="{{ $kategori->nama_kategori }}">{{ $kategori->nama_kategori }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        
+
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tanggal Pengeluaran</label>
                             <div class="grid grid-cols-3 gap-4">
@@ -42,7 +42,7 @@
                                         <option value="">-- Tanggal --</option>
                                         @for($i=1; $i<=31; $i++)
                                             <option value="{{ $i }}" {{ date('j') == $i ? 'selected' : '' }}>{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
-                                        @endfor
+                                            @endfor
                                     </select>
                                 </div>
                                 <!-- Bulan -->
@@ -51,7 +51,7 @@
                                         <option value="">-- Bulan --</option>
                                         @for($i=1; $i<=12; $i++)
                                             <option value="{{ $i }}" {{ date('n') == $i ? 'selected' : '' }}>{{ date('F', mktime(0, 0, 0, $i, 10)) }}</option>
-                                        @endfor
+                                            @endfor
                                     </select>
                                 </div>
                                 <!-- Tahun -->
@@ -61,9 +61,27 @@
                             </div>
                         </div>
 
-                        <div class="mb-4">
+                        <div class="mb-4" x-data="{
+                            raw: '',
+                            formatted: '',
+                            formatInput(e) {
+                                let value = e.target.value.replace(/[^0-9]/g, '');
+                                if (value.length > 15) {
+                                    value = value.slice(0, 15);
+                                }
+                                this.raw = value;
+                                this.formatted = value ? new Intl.NumberFormat('id-ID').format(value) : '';
+                                e.target.value = this.formatted;
+                            }
+                        }">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Jumlah Pengeluaran (Rp)</label>
-                            <input type="number" name="jumlah_pengeluaran" required min="0" step="1" class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Contoh: 500000">
+                            <input type="text"
+                                @input="formatInput($event)"
+                                required
+                                maxlength="19"
+                                class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                placeholder="Contoh: 1.500.000">
+                            <input type="hidden" name="jumlah_pengeluaran" :value="raw" required>
                         </div>
 
                         <div class="mb-6">

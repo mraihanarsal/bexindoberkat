@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Input Pemasukan') }}
+            {{ __('Pemasukan') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-5">
         <div class="w-full sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
 
             <!-- Form Manual -->
@@ -84,6 +84,11 @@
             <div class="w-full lg:w-1/2 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="text-lg font-bold mb-4">Auto-Import dari PDF Invoice Shopee</h3>
+                    <!-- Tampilan Contoh Invoice -->
+                    <h3 class="text-lg font-bold mb-4">Contoh Invoice Shopee</h3>
+                    <div class="mb-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                        <img src="{{ asset('contohupload/contohupload.png') }}" alt="Contoh Invoice Shopee" class="w-full h-auto object-cover">
+                    </div>
                     <form action="{{ route('pemasukan.upload_pdf') }}" method="POST" enctype="multipart/form-data" x-data="{ isUploading: false }" @submit="isUploading = true">
                         @csrf
                         <div class="mb-4">
