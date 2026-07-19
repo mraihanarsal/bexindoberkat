@@ -6,7 +6,10 @@
           mobileSidebarOpen: false
       }"
       @resize.window="sidebarOpen = window.innerWidth >= 1024; if(window.innerWidth >= 1024) mobileSidebarOpen = false"
-      x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))"
+      x-init="$watch('darkMode', val => { 
+          localStorage.setItem('darkMode', val); 
+          document.getElementById('dynamic-favicon').href = val ? '{{ asset('logo/logodarkmode.png') }}' : '{{ asset('logo/logobexindoberkat.png') }}';
+      })"
       :class="{ 'dark': darkMode }">
     <head>
         <meta charset="utf-8">
@@ -14,7 +17,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'BEX INDO BERKAT') }}</title>
-        <link rel="icon" type="image/png" href="{{ asset('logo/logobexindoberkat.png') }}">
+        <link id="dynamic-favicon" rel="icon" type="image/png" href="{{ asset('logo/logobexindoberkat.png') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -22,11 +25,17 @@
 
         <!-- Prevent FOUC -->
         <script>
-            if (localStorage.getItem('darkMode') === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            const isDark = localStorage.getItem('darkMode') === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if (isDark) {
                 document.documentElement.classList.add('dark');
             } else {
                 document.documentElement.classList.remove('dark');
             }
+            
+            // Set initial favicon
+            document.addEventListener('DOMContentLoaded', () => {
+                document.getElementById('dynamic-favicon').href = isDark ? "{{ asset('logo/logodarkmode.png') }}" : "{{ asset('logo/logobexindoberkat.png') }}";
+            });
         </script>
 
         <!-- Scripts -->

@@ -8,7 +8,36 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $totalPemasukan = \App\Models\Pemasukan::sum('jumlah_pendapatan');
+    $totalPengeluaran = \App\Models\Pengeluaran::sum('jumlah_pengeluaran');
+    $labaBersih = $totalPemasukan - $totalPengeluaran;
+    $totalPlatform = \App\Models\Platform::count();
+    
+    $recentPemasukans = \App\Models\Pemasukan::with('toko.platform')->latest('tanggal')->latest('id')->take(5)->get();
+    $recentPengeluarans = \App\Models\Pengeluaran::with('kategori')->latest('tanggal')->latest('id')->take(5)->get();
+
+    $activeSessions = \Illuminate\Support\Facades\DB::table('sessions')
+        ->whereNotNull('user_id')
+        ->where('last_activity', '>=', time() - 900) // 15 mins
+        ->orderBy('last_activity', 'desc')
+        ->get();
+    
+    $activeUsers = \App\Models\User::whereIn('id', $activeSessions->pluck('user_id')->unique())->get();
+    foreach ($activeUsers as $user) {
+        $userSession = $activeSessions->firstWhere('user_id', $user->id);
+        $user->last_activity = $userSession->last_activity;
+    }
+    $activeUsers = $activeUsers->sortByDesc('last_activity')->values();
+
+    return view('dashboard', compact(
+        'totalPemasukan',
+        'totalPengeluaran',
+        'labaBersih',
+        'totalPlatform',
+        'recentPemasukans',
+        'recentPengeluarans',
+        'activeUsers'
+    ));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -56,7 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/pengeluaran/{id}', [App\Http\Controllers\PengeluaranController::class, 'destroy'])->name('pengeluaran.destroy');
 
     // Laporan Mockup Route
-    Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index']);
+    Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
 });
 
 require __DIR__.'/auth.php';
