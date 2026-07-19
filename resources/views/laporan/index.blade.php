@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Laporan Keuangan & Laba Bersih') }}
+            {{ __('Laporan Pendapatan PT Bex Indo Berkat') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-5">
         <div class="w-full sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="p-6 text-gray-900 dark:text-gray-100 flex flex-col md:flex-row justify-between items-center">
@@ -13,7 +13,7 @@
                     <form action="{{ url('laporan') }}" method="GET" class="flex gap-4 w-full md:w-auto">
                         <select name="year" onchange="this.form.submit()" class="w-full md:w-48 rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm cursor-pointer">
                             @foreach($availableYears as $y)
-                                <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>Tahun {{ $y }}</option>
+                            <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>Tahun {{ $y }}</option>
                             @endforeach
                         </select>
                     </form>
@@ -39,7 +39,7 @@
                 <!-- Laba Bersih -->
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-green-500">
                     <div class="p-6">
-                        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Laba Bersih ({{ $year }})</div>
+                        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Pendapatan ({{ $year }})</div>
                         <div class="text-2xl font-bold text-gray-900 dark:text-white">Rp {{ number_format($totalLaba, 0, ',', '.') }}</div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
             <!-- Chart -->
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">Grafik Pemasukan, Pengeluaran & Laba Bersih ({{ $year }})</h3>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">Grafik Perbandingan Pemasukan & Pengeluaran ({{ $year }})</h3>
                     <div class="relative h-96 w-full">
                         <canvas id="laporanChart"></canvas>
                     </div>
@@ -78,35 +78,23 @@
                 type: 'bar',
                 data: {
                     labels: JSON.parse('{!! addslashes(json_encode($labels)) !!}'),
-                    datasets: [
-                        {
-                            label: 'Laba Bersih',
-                            data: JSON.parse('{!! addslashes(json_encode($labaBersih)) !!}'),
-                            type: 'line',
-                            backgroundColor: 'rgba(34, 197, 94, 1)', // green-500
-                            borderColor: 'rgb(34, 197, 94)',
-                            borderWidth: 3,
-                            tension: 0.3,
-                            fill: false,
-                            yAxisID: 'y'
-                        },
-                        {
+                    datasets: [{
                             label: 'Pemasukan',
                             data: JSON.parse('{!! addslashes(json_encode($pemasukan)) !!}'),
-                            backgroundColor: 'rgba(59, 130, 246, 0.8)', // blue-500
+                            backgroundColor: 'rgba(59, 130, 246, 0.85)', // blue-500
                             borderColor: 'rgb(59, 130, 246)',
                             borderWidth: 1,
-                            borderRadius: 4,
-                            yAxisID: 'y'
+                            borderRadius: 6,
+                            maxBarThickness: 40
                         },
                         {
                             label: 'Pengeluaran',
                             data: JSON.parse('{!! addslashes(json_encode($pengeluaran)) !!}'),
-                            backgroundColor: 'rgba(239, 68, 68, 0.8)', // red-500
+                            backgroundColor: 'rgba(239, 68, 68, 0.85)', // red-500
                             borderColor: 'rgb(239, 68, 68)',
                             borderWidth: 1,
-                            borderRadius: 4,
-                            yAxisID: 'y'
+                            borderRadius: 6,
+                            maxBarThickness: 40
                         }
                     ]
                 },

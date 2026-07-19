@@ -71,10 +71,32 @@ class PemasukanController extends Controller
                     continue;
                 }
 
-                // 2. Extract Toko
+                // 2. Extract Toko dengan Normalisasi String
                 $matchedTokoId = null;
+                
+                // Coba ekstrak spesifik Username dari teks (contoh: "Username : let.store")
+                $extractedUsername = '';
+                if (preg_match('/Username\s*:\s*([a-zA-Z0-9\.\_\-]+)/i', $text, $userMatches)) {
+                    $extractedUsername = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $userMatches[1]));
+                }
+
+                // Normalisasi seluruh teks PDF (hilangkan spasi, titik, koma, garis miring, dll)
+                $normalizedText = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $text));
+
                 foreach ($tokos as $toko) {
-                    if (stripos($text, $toko->nama_toko) !== false) {
+                    // Normalisasi nama toko dari database (misal: "let.store" atau "let store" menjadi "letstore")
+                    $normalizedToko = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $toko->nama_toko));
+                    
+                    if (empty($normalizedToko)) continue;
+
+                    // Cek 1: Apakah username hasil ekstrak sama persis dengan nama toko?
+                    if ($extractedUsername !== '' && $extractedUsername === $normalizedToko) {
+                        $matchedTokoId = $toko->id;
+                        break;
+                    }
+                    
+                    // Cek 2: Apakah nama toko terselip di dalam teks PDF yang sudah dinormalisasi?
+                    if (strpos($normalizedText, $normalizedToko) !== false) {
                         $matchedTokoId = $toko->id;
                         break;
                     }
