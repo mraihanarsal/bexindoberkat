@@ -13,13 +13,14 @@
                         <h3 class="text-lg font-bold">Data Riwayat Pengeluaran</h3>
                         <a href="{{ route('pengeluaran.input') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors shadow-sm">+ Tambah Data</a>
                     </div>
-                    
+
 
 
                     <div class="overflow-x-auto border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
                         <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 dark:text-gray-300 uppercase bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700">
                                 <tr>
+                                    <th scope="col" class="px-6 py-4 font-semibold">No</th>
                                     <th scope="col" class="px-6 py-4 font-semibold">Nama Pengeluaran</th>
                                     <th scope="col" class="px-6 py-4 font-semibold">Tanggal</th>
                                     <th scope="col" class="px-6 py-4 font-semibold">Jumlah Pengeluaran</th>
@@ -30,6 +31,7 @@
                             <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                                 @forelse($pengeluarans as $pengeluaran)
                                 <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                                    <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ $pengeluarans->firstItem() + $loop->index }}</td>
                                     <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ $pengeluaran->nama_pengeluaran }}</td>
                                     <td class="px-6 py-4">{{ \Carbon\Carbon::parse($pengeluaran->tanggal)->translatedFormat('d F Y') }}</td>
                                     <td class="px-6 py-4 font-semibold text-red-600 dark:text-red-400">Rp {{ number_format($pengeluaran->jumlah_pengeluaran, 0, ',', '.') }}</td>
@@ -44,11 +46,14 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="5" class="px-6 py-4 text-center">Belum ada data pengeluaran.</td>
+                                    <td colspan="6" class="px-6 py-4 text-center">Belum ada data pengeluaran.</td>
                                 </tr>
                                 @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-4">
+                        {{ $pengeluarans->links() }}
                     </div>
                 </div>
             </div>
