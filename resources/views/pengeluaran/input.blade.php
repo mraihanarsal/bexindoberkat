@@ -25,7 +25,12 @@
                         @csrf
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nama Pengeluaran</label>
-                            <input type="text" name="nama_pengeluaran" required class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Contoh: Gaji Karyawan, Sewa Gudang, Listrik">
+                            <select name="nama_pengeluaran" required class="w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option value="">-- Pilih Kategori Pengeluaran --</option>
+                                @foreach($kategoris as $kategori)
+                                    <option value="{{ $kategori->nama_kategori }}">{{ $kategori->nama_kategori }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         
                         <div class="mb-4">

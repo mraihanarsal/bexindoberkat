@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request; 
 use App\Models\Pengeluaran;
+use App\Models\Kategori;
 use App\Models\RekapKeuangan;
 
 class PengeluaranController extends Controller 
 { 
     public function input() 
     { 
-        return view('pengeluaran.input'); 
+        $kategoris = Kategori::orderBy('nama_kategori')->get();
+        return view('pengeluaran.input', compact('kategoris')); 
     } 
 
     public function store(Request $request)
