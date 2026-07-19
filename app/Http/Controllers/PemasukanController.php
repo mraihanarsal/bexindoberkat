@@ -129,64 +129,7 @@ class PemasukanController extends Controller
         return view('pemasukan.riwayat', compact('pemasukans')); 
     } 
 
-    public function grafik(Request $request)
-    {
-        $period1 = $request->input('period1');
-        if (!$period1 || !preg_match('/^\d{4}-\d{2}$/', $period1)) $period1 = date('Y-m');
-        
-        $period2 = $request->input('period2');
-        if (!$period2 || !preg_match('/^\d{4}-\d{2}$/', $period2)) $period2 = date('Y-m', strtotime('-1 month'));
-        
-        $p1 = explode('-', $period1);
-        $year1 = (int)$p1[0];
-        $month1 = (int)$p1[1];
-        
-        $p2 = explode('-', $period2);
-        $year2 = (int)$p2[0];
-        $month2 = (int)$p2[1];
 
-        $data1 = Pemasukan::with('toko')->where('bulan', $month1)->where('tahun', $year1)->get();
-        $data2 = Pemasukan::with('toko')->where('bulan', $month2)->where('tahun', $year2)->get();
-
-        $total1 = $data1->sum('jumlah_pendapatan');
-        $total2 = $data2->sum('jumlah_pendapatan');
-
-        $tokoData1 = [];
-        foreach($data1 as $item) {
-            if(!isset($tokoData1[$item->toko->nama_toko])) $tokoData1[$item->toko->nama_toko] = 0;
-            $tokoData1[$item->toko->nama_toko] += $item->jumlah_pendapatan;
-        }
-        $tokoData2 = [];
-        foreach($data2 as $item) {
-            if(!isset($tokoData2[$item->toko->nama_toko])) $tokoData2[$item->toko->nama_toko] = 0;
-            $tokoData2[$item->toko->nama_toko] += $item->jumlah_pendapatan;
-        }
-
-        $labels = array_unique(array_merge(array_keys($tokoData1), array_keys($tokoData2)));
-        sort($labels);
-        
-        $chartToko1 = [];
-        $chartToko2 = [];
-        foreach($labels as $label) {
-            $chartToko1[] = $tokoData1[$label] ?? 0;
-            $chartToko2[] = $tokoData2[$label] ?? 0;
-        }
-
-        $availableYears = Pemasukan::select('tahun')->distinct()->orderBy('tahun', 'desc')->pluck('tahun')->toArray();
-        if(empty($availableYears)) $availableYears = [date('Y')];
-        if(!in_array(date('Y'), $availableYears)) {
-            $availableYears[] = date('Y');
-            rsort($availableYears);
-        }
-
-        return view('pemasukan.grafik', compact(
-            'period1', 'period2',
-            'month1', 'year1', 'month2', 'year2',
-            'total1', 'total2',
-            'labels', 'chartToko1', 'chartToko2',
-            'availableYears'
-        ));
-    }
 
     public function destroy(int $id)
     {
