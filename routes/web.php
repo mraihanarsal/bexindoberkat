@@ -14,7 +14,7 @@ Route::get('/dashboard', function () {
     $totalPlatform = \App\Models\Platform::count();
     
     $recentPemasukans = \App\Models\Pemasukan::with('toko.platform')->latest('tanggal')->latest('id')->take(5)->get();
-    $recentPengeluarans = \App\Models\Pengeluaran::with('kategori')->latest('tanggal')->latest('id')->take(5)->get();
+    $recentPengeluarans = \App\Models\Pengeluaran::latest('tanggal')->latest('id')->take(5)->get();
 
     $activeSessions = \Illuminate\Support\Facades\DB::table('sessions')
         ->whereNotNull('user_id')

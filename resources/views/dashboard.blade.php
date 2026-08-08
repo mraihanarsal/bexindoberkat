@@ -5,7 +5,7 @@
         <div class="mb-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
                 <h2 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                    Selamat Datang, {{ auth()->user()->name }}! 
+                    Selamat Datang, {{ auth()->user()->name }}!
                     <span class="text-2xl inline-block origin-bottom-right hover:animate-bounce cursor-default">👋</span>
                 </h2>
                 <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -83,7 +83,7 @@
 
             <!-- Transactions Area (2/3 width) -->
             <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-                
+
                 <!-- Pemasukan Terbaru -->
                 <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden flex flex-col">
                     <div class="px-6 py-5 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
@@ -138,10 +138,10 @@
                             <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                                 @forelse($recentPengeluarans as $pengeluaran)
                                 <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                                    <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">{{ \Illuminate\Support\Str::limit($pengeluaran->keterangan, 15) }}</td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">{{ \Illuminate\Support\Str::limit($pengeluaran->keterangan ?? '-', 15) }}</td>
                                     <td class="px-4 py-3">
                                         <span class="inline-flex items-center px-2 py-1 rounded text-[10px] font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
-                                            {{ $pengeluaran->kategori->nama_kategori ?? '-' }}
+                                            {{ $pengeluaran->nama_pengeluaran ?? '-' }}
                                         </span>
                                     </td>
                                     <td class="px-4 py-3 text-right text-red-600 dark:text-red-400 font-semibold">Rp {{ number_format($pengeluaran->jumlah_pengeluaran, 0, ',', '.') }}</td>
